@@ -11,43 +11,30 @@ pipeline:
         repoName: hashinyc/notes-app-cicd
   stages:
     - stage:
-        identifier: build
-        name: build
+        name: docker build
+        identifier: docker_build
+        description: ""
+        type: CI
         spec:
+          cloneCodebase: true
           caching:
             enabled: true
-          cloneCodebase: true
-          execution:
-            steps:
-              - step:
-                  identifier: installdependencies
-                  name: install dependencies
-                  spec:
-                    command: npm install
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: test
-                  name: test
-                  spec:
-                    command: npm run test
-                  timeout: ""
-                  type: Run
-              - step:
-                  identifier: dockerbuild
-                  name: docker_build
-                  spec:
-                    caching: true
-                    connectorRef: <+input>
-                    repo: hello/world
-                    tags:
-                      - latest
-                  timeout: ""
-                  type: BuildAndPushDockerRegistry
+            override: false
           platform:
             os: Linux
             arch: Amd64
           runtime:
             type: Cloud
             spec: {}
-        type: CI
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_1
+                  identifier: BuildAndPushDockerRegistry_1
+                  spec:
+                    connectorRef: account.DockerHub
+                    repo: baiyun/notesappcicd
+                    tags:
+                      - latest
+                    dockerfile: Dockerfile
