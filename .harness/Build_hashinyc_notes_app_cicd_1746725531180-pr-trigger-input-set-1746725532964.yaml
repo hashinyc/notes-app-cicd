@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_hashinyc_notes_app_cicd_1746725531180-pr-trigger-input-set
+  identifier: Build_hashinyc_notes_app_cicd_1746725531180prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: CI_Pipeline
+  pipeline:
+    identifier: Build_hashinyc_notes_app_cicd_1746725531180
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
